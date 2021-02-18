@@ -21,6 +21,7 @@ scikit-learn = "*"
 category-encoders = "*"
 joblib = "*"
 psycopg2-binary = "*"
+awsebcli = "*"
 
 [requires]
 python_version = "3"

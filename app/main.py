@@ -27,7 +27,7 @@ app = FastAPI(
     description=description,
     docs_url='/',
 )
-# tags to show on FatsAPI 
+# tags to show on FastAPI 
 # app.include_router(db.router, tags=['Database'])
 app.include_router(ml.router, tags=['Machine Learning'])
 app.include_router(viz.router, tags=['Visualization'])
