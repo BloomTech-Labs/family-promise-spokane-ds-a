@@ -33,7 +33,6 @@ def set_variables(member_id):
   # AND members.family_id = families.id'.format(member_id)
   query = 'SELECT * FROM members where id = {}'.format(member_id)
   results = dbmanage(uri,query)
-
   #sets variables from the db results
   results_dict['case_members'] = results['case_members']
   results_dict['race'] = results['demographics']['race']
