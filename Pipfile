@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+pydantic = "*"
+sqlalchemy = "*"
+psycopg2 = "*"
+pandas = "*"
+python-dotenv = "*"
+
+[requires]
+python_version = "3.8"
