@@ -8,6 +8,8 @@ from sqlalchemy import and_
 from sqlalchemy import Integer
 from sqlalchemy.sql import func
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.sqltypes import Float
+
 from .db_init import Members, Families
 
 def view_member(db: Session, member_id: int):
@@ -16,7 +18,7 @@ def view_member(db: Session, member_id: int):
 def view_family(db: Session, family_id: int):
     return db.query(Families).filter(Families.id == family_id).first()
 
-def exit_date_subset(*, db: Session, table = Members, today_delta = 210, start_range: int):
+def exit_date_subset(*, db: Session, table = Members, today_delta = 178, start_range: int):
     today = date.today() - timedelta(days = today_delta)
     start = today - timedelta(days = start_range)
     subset = db.query(table).filter(and_(table.date_of_exit >= start, table.date_of_exit <= today)).subquery()
@@ -39,7 +41,8 @@ def avg_stay(db: Session, time_range: int):
 
 def income_increase(db: Session, time_range: int):
     date_subset = exit_date_subset(db=db, start_range=time_range)
-    #income = db.query(date_subset).filter(date_subset.c.demographics["income"].astext.cast(Integer) != -1)
-    # date_subset.c.income_at_exit > date_subset.c.demographics["income"].astext.cast(Integer)
-    income = db.query(date_subset).filter(date_subset.c.income_at_exit != -1)
-    return income.count()
+
+    #Filter for only those that reported income at entry
+    income = db.query(date_subset).filter(date_subset.c.demographics["income"].astext.cast(Float) != -1).subquery()
+    num_increased = db.query(income).filter(income.c.demographics["income"].astext.cast(Float) < income.c.income_at_exit)
+    return num_increased.count()

@@ -7,10 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
 from sqlalchemy.inspection import inspect
+
 from .db_init import SessionLocal, engine, Members, Families
 from .crud import view_family, view_member, count_exits, avg_stay, income_increase
+from .visualizations import pie_exits
 
-app = FastAPI()
+app = FastAPI(title='Family Promise DS API - Team B',
+    docs_url='/')
 
 
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_methods = ["*"], allow_headers = ["*"])
@@ -60,8 +63,10 @@ def view_income(time_range: int = Path(..., gt = 0, le = 365), db: Session = Dep
     income = income_increase(db, time_range = time_range)
     return income
 
-
-
+@app.get("/pie_exits/{time_range}")
+def pie_chart(time_range: int = Path(..., gt= 0), db: Session = Depends(get_db)):
+    plotly_json = pie_exits(db, time_range = time_range)
+    return plotly_json
 
 # Debugging routes
 #@app.get("/DBRelations")
