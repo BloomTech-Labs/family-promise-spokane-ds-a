@@ -1,7 +1,7 @@
 """
 Main file for routes
 """
-
+import pandas as pd
 from fastapi import Depends, FastAPI, HTTPException, Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import MetaData
@@ -11,6 +11,7 @@ from sqlalchemy.inspection import inspect
 from .db_init import SessionLocal, engine, Members, Families
 from .crud import view_family, view_member, count_exits, avg_stay, income_increase
 from .visualizations import pie_exits
+from .predict import predictor
 
 app = FastAPI(title='Family Promise DS API - Team B',
     docs_url='/')
@@ -67,6 +68,15 @@ def view_income(time_range: int = Path(..., gt = 0, le = 365), db: Session = Dep
 def pie_chart(time_range: int = Path(..., gt= 0), db: Session = Depends(get_db)):
     plotly_json = pie_exits(db, time_range = time_range)
     return plotly_json
+
+@app.get("/predict_exits/{member_id}")
+def predict_exits(member_id: int = Path(..., gt = 0), db: Session = Depends(get_db)):
+    """Generates exit destination prediction given the member's id"""
+    query = f'''select * from members where members.id = {member_id};'''
+    df = pd.read_sql_query(query, engine)
+    exit = predictor(df)
+    return exit
+ 
 
 # Debugging routes
 #@app.get("/DBRelations")
