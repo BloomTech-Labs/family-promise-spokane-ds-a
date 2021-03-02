@@ -18,6 +18,7 @@ numpy = "*"
 joblib = "*"
 gunicorn = "*"
 typing-extensions = "*"
+category-encoders = "*"
 
 [requires]
 python_version = "3.8"
