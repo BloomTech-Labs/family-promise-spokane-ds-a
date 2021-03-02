@@ -16,6 +16,8 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 numpy = "*"
 joblib = "*"
+gunicorn = "*"
+typing-extensions = "*"
 
 [requires]
 python_version = "3.8"
