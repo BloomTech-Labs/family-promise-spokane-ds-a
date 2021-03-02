@@ -10,12 +10,12 @@ from sqlalchemy.inspection import inspect
 
 from .db_init import SessionLocal, engine, Members, Families
 from .crud import view_family, view_member, count_exits, avg_stay, income_increase
-from .visualizations import pie_exits
+from .visualizations import pie_exits, moving_average
 from .predict import predictor
 
 app = FastAPI(title='Family Promise DS API - Team B',
     docs_url='/')
-
+# app = FastAPI()
 
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_methods = ["*"], allow_headers = ["*"])
 
@@ -50,7 +50,7 @@ def all_exits(time_range: int = Path(..., gt = 0, le = 365), db: Session = Depen
     transitionals = count_exits(db, exit_type= 'Transitional Housing', time_range= time_range)
     unknowns = count_exits(db, exit_type= 'Unknown/Other', time_range= time_range)
     emergencies = count_exits(db, exit_type= 'Emergency Shelter', time_range= time_range)
-    exits = {"Permanent Exits" : permanents, "Emergency Shelter" : emergencies, "Temporary Exits" : temps, "Transitional Homes" : transitionals, "Unknown/Other" : unknowns}
+    exits = {"Permanent Exits" : permanents, "Emergency Shelter" : emergencies, "Temporary Exits" : temps, "Transitional Housing" : transitionals, "Unknown/Other" : unknowns}
     return exits
 
 @app.get("/average_stay/{time_range}")
@@ -69,6 +69,11 @@ def pie_chart(time_range: int = Path(..., gt= 0), db: Session = Depends(get_db))
     plotly_json = pie_exits(db, time_range = time_range)
     return plotly_json
 
+@app.get("/avg_plot/{time_range}")
+def moving_average_plot(time_range: int = Path(..., ge = 5, le = 90), db: Session = Depends(get_db)):
+    avg_plot = moving_average(db, time_range= time_range)
+    return avg_plot
+
 @app.get("/predict_exits/{member_id}")
 def predict_exits(member_id: int = Path(..., gt = 0), db: Session = Depends(get_db)):
     """Generates exit destination prediction given the member's id"""
@@ -78,8 +83,8 @@ def predict_exits(member_id: int = Path(..., gt = 0), db: Session = Depends(get_
     return exit
  
 
-# Debugging routes
-#@app.get("/DBRelations")
+
+# Debugging
 def view_relations():
     all_relations = {"members" : [], "families" : []}
     member_relations = inspect(Members).relationships.items()
