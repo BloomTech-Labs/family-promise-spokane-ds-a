@@ -83,8 +83,8 @@ def predict_exits(member_id: int = Path(..., gt = 0), db: Session = Depends(get_
     return exit
  
 
-# Debugging routes
-#@app.get("/DBRelations")
+
+# Debugging
 def view_relations():
     all_relations = {"members" : [], "families" : []}
     member_relations = inspect(Members).relationships.items()

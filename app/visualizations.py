@@ -33,6 +33,10 @@ def moving_average(db: Session, time_range: int):
         for day in daterange:
             avg = count_exits(db= db, exit_type= exit_type, time_range= 90, stop= day)
             averages_dict[exit_type].append(avg)
+
+    # all_
+    # for exit_type in exits:
+
     averages_dict.update({"Days" : daterange})
     avg_df = pd.DataFrame(averages_dict)
 
