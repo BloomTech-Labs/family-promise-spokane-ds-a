@@ -19,6 +19,7 @@ joblib = "*"
 gunicorn = "*"
 typing-extensions = "*"
 category-encoders = "*"
+plotly = "*"
 
 [requires]
 python_version = "3.8"
