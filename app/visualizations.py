@@ -29,6 +29,7 @@ def moving_average(db: Session, time_range: int):
     exits = ["Unknown/Other", "Permanent Exit", "Emergency Shelter", "Temporary Exit", "Transitional Housing"]
     daterange = pd.date_range(today - timedelta(days = time_range), today)
     averages_dict = {"Permanent Exit" : [], "Emergency Shelter" : [], "Temporary Exit" : [], "Transitional Housing" : [], "Unknown/Other" : []}
+    a = [5,|6,7,8,8,1,2|,3,4,5]
     for exit_type in exits:
         for day in daterange:
             avg = count_exits(db= db, exit_type= exit_type, time_range= 90, stop= day)

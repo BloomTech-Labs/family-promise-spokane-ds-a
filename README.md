@@ -160,140 +160,6 @@ We are receiving a POST request with the member id from the web team and using t
 /predict: send POST request to this endpoint with the member_id value. 
 
 # Issues
-* Newest Model not implemented Due to the following issues. 
-*  Some Features needed for the new predictive model is not on the back-end Database
-* Some Features on the new Predictive Model differs in data format and data type from the back-end database. 
-```
-# This Code Snippet Shows where and how to fix issues
-def set_variables(member_id):
-#current date for Days/ Years calculations
-  today_date = datetime.date.today()
-  results_dict = {} # Dictionary to hold the results value to be transformed to df
-  
-  query = 'SELECT * FROM members,families where members.id = {} and families.id = members.family_id'.format(member_id)
-  results = dbmanage(uri,query)
-#repeated columns need to be used more than once. 
-  enroll_date = results['date_of_enrollment']
-  date_of_birth = datetime.datetime.strptime(
-      results['demographics']['DOB'], '%m-%d-%Y').date()
-# Above Code is working - 
-# Below Commented Out Code needs to be fixed.
-# Not Commented out code, working fine. 
-#sets variables from the db results
-#Project_Name (Probably Take out from model. 
- # results_dict['project_name'] = 'family promise' # This might be removed from last model 
-#Relationship to head of household
-  results_dict['relationship'] = results['demographics']['relationship']
-#Case Members
-  results_dict['case_members'] = results['case_members']
-#enroll date
-  results_dict['enroll_date'] = enroll_date
-#Exit Date (not yet)(need table ? ) 
-  # results_dict['exit_date'] = 'exit date' #not in table. needs to be added. 
-  # Social SEcurity Quality( will need table (not yet))
-  # results_dict['social_security_quality']  = 'Full SSN Given' #PlaceHOlder
-#age at enrollment
-  results_dict['age_at_enrollment'] = int((enroll_date - date_of_birth).days / 365.2425)
-# Race
-  results_dict['race'] = results['demographics']['race']
-#ethnicity
-  results_dict['ethnicity'] = results['demographics']['ethnicity']
-# Gender
-  results_dict['gender'] = results['demographics']['gender']
-#veteran Status
-  results_dict['veteran_status'] = results['gov_benefits']['veteran_services']
-#disabilities at time of entry 
-  results_dict['physical_disabilities'] = results['barriers']['physical_disabilities']
-#living situation (current location)
-  results_dict['living_situation'] = results['homeless_info']['current_location']
-#length of stay
-  results_dict['length_of_stay'] = results['length_of_stay']
-#homeless start date 
-  results_dict['homless_start_date'] = datetime.datetime.strptime(
-      results['homeless_info']['homeless_start_date'], '%d-%b-%Y').date()
-# Length of time homeless aprox start
-  results_dict['length_of_time_homeless'] = results['homeless_info']['total_len_homeless'] 
-  results_dict['time_homeless_last_years'] = results['homeless_info']['total_len_homeless']
-  # results_dict['total_month_homeless_last_year'] = 4 #PlaceHolder. nOt in Database
-# Last Permanent Address
- # results_dict['last_permanent_address'] = results['last_permanent_address'] # database does not have same data format as ds dataset. #needs to be fixed. 
-  results_dict['state'] = (results['last_permanent_address'].split(" "))[-3] 
-  results_dict['zip'] = (results['last_permanent_address'].split(" "))[-2]
-# Enrollment length  
-  results_dict['enrollment_length'] = int((today_date - enroll_date).days) # Days Enrolled in project. 
-  #Housing Status 
-  # results_dict['housing_status'] = 'homeless ' # Place HOlder #Not in backend database. 
-  results_dict['covered_by_insurance'] = results['insurance']['has_insurance']
-#Domestic Violence 
-#  results_dict['domestic_violence'] = results['domestic_violence_info']['fleeing_dv'] #Probably needs chang from boolean to string on backend
-#Household Type
-  results_dict['household_type'] = results['household_type']
-# Last Grade Completed   
-  results_dict['last_grade_completed'] = results['schools']['highest_grade_completed']
-# School Enrolled Status  
- # results_dict['school_status'] = results['schools']['enrolled_status'] #Not the same data format. 
-
-# # Following columns either need to be added to the backend Databse or Removed before training the new model. 
-#    'Employed Status'
-#    'Why Not Employed',
-#    'Count of Bed Nights (Housing Check-ins)'
-#    'Date of Last ES Stay (Beta)'
-#    'Date of First ES Stay (Beta)'
-#    'Income Total at Entry'
-#    'Income Total at Exit'
-#    'Non-Cash Benefit Count'
-#     'Non-Cash Benefit Count at Exit',
-
-  results_dict['barrier_count'] = 0 
-  
-  for item in results['barriers'].values():
-    if item == True:
-      results_dict['barrier_count'] += 1
-#Following column not in database 
-  # 'Under Years Old' # Probably need to remove from model. ? . 
-#Health Issues      
- # results_dict['chronic_health_issues'] = results['barriers']['chronic_health_issues'] # different format backend from dataset. boolean/string. 
-
-#  results_dict['mental_illness'] = results['barriers']['mental_illness'] # different data format backend from dataset boolean/string.
-  #The following columns are not on the backend database
-  # 'CaseChildren'
-  # 'CaseAdults'
-
-  # The following columns need to be condensed to one in data science side . exist on backend as ['health_insurance_type']
-   
-  # 'Other Public'
-  # 'State Funded'
-  # 'Indian Health Services (IHS)'
-  # 'Other'
-  # 'Combined Childrens HealthInsurance/Medicaid'
-  # 'Medicaid'
-  # 'Medicare'
-  # 'State Children's health Insurance S-CHIP'
-  # 'Veteran's Administration Medical Services'
-  # 'Health Insurance obtained through COBRA'
-  # 'Private - Employer'
-  # 'Private'
-  # 'Private - Individual'
-
-# Following Columns are not on the backend database 
- # 'Earned Income',
- # 'Unemployment Insurance'
- # 'Supplemental Security Income',
- # 'Social Security Disability  Income'
- # 'VA Disability Compensation'
- # 'Private Disability Income'
- # 'Workers Compensation'
- # 'TANF',
- # 'General Assistance'
- # 'Child Support'
- # 'Other Income' 
-  
-
- # results_dict['current_age'] = int((today_date - date_of_birth).days / 365.2425 #used on previous model. not used on this model. 
- #     )
-
-
-   ```
 **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
 
 - Check first to see if your issue has already been reported.
@@ -329,6 +195,38 @@ Remember that this project is licensed under the MIT license, and by submitting 
 - Ensure that your code conforms to our existing code conventions and test coverage.
 - Include the relevant issue number, if applicable.
 - You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+
+### For future cohorts*\
+Our team in Labs 31 was the third iteration of this Labs project and for almost the first two weeks, we were solving the puzzle of what was left behind for us. Hopefully this ReadME would help you to hit the ground running. Everything is divided into the appropriate section below.
+
+To start, it would help to look at all the previous cohorts roadmaps to have a sense of their deliverables. This was huge in helping us fill some of the puzzle pieces.
+
+First, the models. There's a few pickled models in the repos from versions 1 to 4. As we came to understand it, v1 and v2 were created by Labs 29 and trained on not enough features to satisfy Labs 30 team. They then created v3 and v4 training them on more features but not a significant increase in accuracy. V4 never got implemented by Labs 30 because it was trained on features in the historical data that weren't in the DB and differed in data format for some of the features that were common to both the historical data and DB. Unfortunately, we noticed there's leakage in all 4 models due to the shuffled split. Multiple family members from one family id end up in the train and test sets. Getting rid of any leakage results in a virtually baseline accuracy of ~40%. That's the model we had to use and you can find the model and the notebook at *./app/assets/model.pkl* and *./notebooks/Model.ipynb* respectively.
+
+Next is the database and historical data. We had an extra task outside our roadmap the first two weeks to merge the historical data with the database. The historical data is the all_data_with_exits csv file. In the first iteration of this project, the DB was expected to follow the same format as the historical data but something got lost in translation somewhere along the way. It would help to go through the intake form while viewing the database to get a sense of what the DB holds. We view the database with [TablePlus](https://tableplus.com/). In our work to merge the data, we assembled a [Google Doc](https://docs.google.com/document/d/1U2kta5EFHWheiXBFhlNwLo7UwW2FuzEJQ20UF77KRZw/edit) that would hopefully have more answers than questions. As you can see there's multiple problems like inconsistent data in DB from text fields. In an ideal world, a family goes through intake, all data ends up in the DB like in the csv, then our model draws data from the DB to make a prediction. To workaround, an adjacent teammate from Team A created our own Postgres database to use. The link is in our env files but will be forwarded to you. Unfortunately in this process, the original DB Members and Families tables were accidentally overwritten so if it's not fixed, our google docs might be the only idea of what the tables used to look like. With our own DB, we now have the code for a model and the dashboard. If the DB is ever adjusted to what it was originally intended, you'll have the starter code to switch the env variables and make some minor adjustments to have working code. Note that our database mostly uses the members table features and a couple from Families. Note that any unknown integers were saved as -1. Should be able to see the code in Team A's repo. The last exit date in the csv is end of August, 2020 so our code sets "today" as 210 days ago with a timedelta to enable us to pull actual data.
+
+Next is the API. The API we inherited was unfortunately broken and we were not overly satisfied with the code. The shaply plots didn't work either as seen in the demo. We moved everything from the earlier cohorts to old_app and created a new API in /app with as much DRY code as we could using SQLAlchemy's automap.Try deploying locally to see the docs and all the routes.
+
+When deploying to AWS, we had some problems getting our deployment to work. Turns out it was because we created the pipfile lock with Windows. Using the original Pipfile and lock from Team A's earlier cohorts helped with a temporary workaround for our first deployment since it was created on Linux. We also used Docker as the python approach in Lambda docs didn't help either. Simply skip steps 2, 3, and 4 then change *python-3.7* to *docker* in step 7. The python version seems to raise issues with nginx and creating specification files. Docker was more straightforward. The second time deploying, we had a teammate use WSL to do all the pipenv installs and it was smooth sailing.
+
+There's two environments from DS-31-B on AWS. The first is *fam-promise-ds-teamB* which we'll call API 1. The second is *family-promise-ds-31B* which we'll call API 2. API 1 was our first deployment to give the Web team an API to test initial dashboard queries with. It's bare bones in that:
+* the "/" route doesn't route to the FastAPI's interactive openapi docs
+* works just like it would locally by going to "/docs" to use the interactive docs
+* only meaningful routes are the digital dashboard routes for exits, average stay, and income increase
+* Never got updated with any new code
+
+API 2 is more complete and:
+* has the home route going to the interactive docs
+* includes the plotly routes for exits and 90 day exit moving averages
+* includes the predict exit route
+* Gets updated with any new code
+
+Note that the Web team could get responses from API 2 locally but couldn't from their deployed app. This was before updating the CORS security origins to only allow their deployment to call the API. As a result we left the security open to all in the meantime till that's figured out. Here are the appropriate links for each API:
+* API 1: http://fam-promise-ds-teamb.eba-sj7vxixq.us-east-1.elasticbeanstalk.com/
+* API 2: https://b-ds.familypromisesofspokane.dev/ (Hosting http://family-promise-ds-31b.eba-k6eubjpn.us-east-1.elasticbeanstalk.com/)
+
+It'll be beneficial to check which API version the web team is using for calls and advise them accordingly.
+
 
 ### Attribution
 

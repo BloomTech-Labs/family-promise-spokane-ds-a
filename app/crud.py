@@ -66,6 +66,7 @@ def count_exits(db: Session, exit_type: str, time_range: int, stop = today):
     # Count number of occurrences of specific exit type
     exit_subset = db.query(date_subset).filter(date_subset.c.exit_destination.like(exit_type))
     exit_count = exit_subset.count()
+    
     return round((exit_count / all_exit_count) * 100)
 
 def avg_stay(db: Session, time_range: int):
