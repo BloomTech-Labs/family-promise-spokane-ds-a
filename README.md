@@ -2,26 +2,28 @@
 # Family Promise of Spokane
 
 
-You can find the deployed project at [Family Promise of Spokane](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com//).
+You can find the fully deployed project at [Family Promise of Spokane](https://b.familypromisesofspokane.dev/) and the [Data Science API](https://b-ds.familypromisesofspokane.dev/)as long as they are still hosted.
 
 # Description
 
 The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assitance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
 # Contributors
 
-| [Kristine Wang](https://github.com/KristineYW) | [Tyler Etheridge](https://github.com/tyleretheridge) | [Santiago Berniz](https://github.com/sberniz/) | [Leslie Rodriguez](https://github.com/thereactgirl) |
-| :---: | :---: | :---: | :---: | 
-| [<img src="https://avatars0.githubusercontent.com/u/63246056?s=400&u=a10524916b756eb26132d0803bec3cbe62ede1ef&v=4" width = "200" />](https://github.com/KristineYW) | [<img src="https://avatars3.githubusercontent.com/u/61953470?s=400&u=8f8538f4d10dcb45b9179eb6990d1ef9c1aadc8d&v=4" width = "200" />](https://github.com/tyleretheridge) | [<img src="https://avatars3.githubusercontent.com/u/6207914?s=460&u=8bfaa068f7942170423371ff10e8f04f09f41e81&v=4" width = "200" />](https://github.com/sberniz/) | [<img src="https://avatars3.githubusercontent.com/u/46256764?s=400&u=337301ad07625f6977ed520ff7092ae54bb0852f&v=4" width = "200" />](https://github.com/thereactgirl) |
-| TPL | Data Scientist | Data Scientist | Web Developer | Web Developer | 
-|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/KristineYW) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tyleretheridge) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sberniz/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/thereactgirl) |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kristine-wang-ds/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tylerjetheridge/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/santiago-berniz/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/thereactgirl/) |          
+## Data Science Team
 
-| [Emily Huntwork](https://github.com/Ehuntwork) | [Abdi Mo](https://github.com/abdimohamud) | [Isaiah Fowler](https://github.com/idongessien) |
-| :---: | :---: | :---: |  
-| [<img src="https://avatars1.githubusercontent.com/u/27293120?s=400&u=e6c0fc75189b75dea5233e02562784ed1cfa2faf&v=4" width = "200" />](https://github.com/Ehuntwork) | [<img src="https://avatars1.githubusercontent.com/u/65041807?s=400&u=2ff3514545d906fe2b734fed79c7f8d640b58ae6&v=4" width = "200" />](https://github.com/abdimohamud) | [<img src="https://avatars1.githubusercontent.com/u/66272034?s=400&u=db133631ead14125bb0d5e9515932985c6293448&v=4" width = "200" />](https://github.com/isaiah-j) | 
-| Web Developer | Web Developer | Web Developer | 
-|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Ehuntwork) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/abdimohamud) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/isaiah-j) | 
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/emily-huntwork/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/abdinajib-mohamud/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/isaiah-fowler/) |              
+| [Kristine Wang](https://github.com/KristineYW) | [Tyler Etheridge](https://github.com/tyleretheridge) | [Santiago Berniz](https://github.com/sberniz/) | [Christopher Lee](https://github.com/chrislee973) |
+| :---: | :---: | :---: | :---: | 
+| [<img src="https://avatars0.githubusercontent.com/u/63246056?s=400&u=a10524916b756eb26132d0803bec3cbe62ede1ef&v=4" width = "200" />](https://github.com/KristineYW) | [<img src="https://avatars3.githubusercontent.com/u/61953470?s=400&u=8f8538f4d10dcb45b9179eb6990d1ef9c1aadc8d&v=4" width = "200" />](https://github.com/tyleretheridge) | [<img src="https://avatars3.githubusercontent.com/u/6207914?s=460&u=8bfaa068f7942170423371ff10e8f04f09f41e81&v=4" width = "200" />](https://github.com/sberniz/) | [<img src="https://avatars.githubusercontent.com/u/44345856?s=460&u=d27781ca6a5d01414c4ffbe7e0ac9986e3acd114&v=4" width = "200" />](https://github.com/chrislee973) |
+| TPL | Data Scientist | Data Scientist | Data Scientist | 
+|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/KristineYW) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tyleretheridge) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sberniz/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/chrislee973) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kristine-wang-ds/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tylerjetheridge/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/santiago-berniz/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/chrislee973/) |          
+
+| [Ik Okoro](https://github.com/ik-okoro) | [Justin Rivest](https://github.com/jrivest2) |
+| :---: | :---: |  
+| [<img src="https://ca.slack-edge.com/ESZCHB482-W019Y5BRPEC-c1d88c2f8d2c-512" width = "200" />](https://github.com/ik-okoro) | [<img src="https://avatars.githubusercontent.com/u/55200197?s=460&u=3593bf0d5d9e919a817dd057345f0c5e35f1c6da&v=4" width = "200" />](https://github.com/jrivest2) | 
+| Data Scientist | Data Scientist | 
+|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ik-okoro) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jrivest2) | 
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ik-okoro-ml-engineer) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/justinrivest/) |              
 
 <br>          
 
