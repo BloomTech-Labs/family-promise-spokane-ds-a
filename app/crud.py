@@ -15,17 +15,20 @@ from .db_init import Members, Families
 # Set all instances of today as 210 days ago
 today = date.today() - timedelta(days = 210)
 
+
 def view_member(db: Session, member_id: int):
     """
     Returns a member instance by their member id
     """
     return db.query(Members).filter(Members.id == member_id).first()
 
+
 def view_family(db: Session, family_id: int):
     """
     Returns a family instance by their family_id
     """
     return db.query(Families).filter(Families.id == family_id).first()
+
 
 def exit_date_subset(*, db: Session, table = Members, end = today, start_range: int):
     """
@@ -41,7 +44,9 @@ def exit_date_subset(*, db: Session, table = Members, end = today, start_range: 
     start = end - timedelta(days = start_range)
     subset = db.query(table).filter(and_(table.date_of_exit >= start, 
                                             table.date_of_exit <= end)).subquery()
+    
     return subset
+
 
 def count_exits(db: Session, exit_type: str, time_range: int, stop = today):
     """
@@ -66,19 +71,40 @@ def count_exits(db: Session, exit_type: str, time_range: int, stop = today):
     # Count number of occurrences of specific exit type
     exit_subset = db.query(date_subset).filter(date_subset.c.exit_destination.like(exit_type))
     exit_count = exit_subset.count()
-    
+
     return round((exit_count / all_exit_count) * 100)
 
+
 def avg_stay(db: Session, time_range: int):
+    """
+    Calculates the average length of stay of families over a date subset
+    Returns the average rounded to an integer
+    Parameters:
+    db: Database session
+    time_range: n days to use for subset
+    """
+    # Create date subset for required n days
     date_subset = exit_date_subset(db=db, start_range= time_range)
+
+    # Query for average and call column value
     avg = db.query(func.avg(date_subset.c.length_of_stay)).one()[0]
+    
     return round(avg)
 
+
 def income_increase(db: Session, time_range: int):
+    """
+    Returns a count of families with increased income upon exit
+    Parameters:
+    db: Database session
+    time_range: n days to use for subset
+    """
+    
     date_subset = exit_date_subset(db=db, start_range=time_range)
 
     #Filter for only those that reported income at entry
     #   and check if exit income greater than entry's
     income = db.query(date_subset).filter(and_(date_subset.c.demographics["income"].astext.cast(Float) != -1.0, 
                                                 date_subset.c.income_at_exit > date_subset.c.demographics["income"].astext.cast(Float)))
+    
     return income.count()

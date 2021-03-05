@@ -1,3 +1,9 @@
+"""
+File for generating plotly visualizations:
+    - Plot for the exit type percentages
+    - Plot for the 90 day moving averages of exit types
+"""
+
 import pandas as pd
 import plotly.graph_objects as go
 from datetime import date, timedelta
@@ -29,14 +35,11 @@ def moving_average(db: Session, time_range: int):
     exits = ["Unknown/Other", "Permanent Exit", "Emergency Shelter", "Temporary Exit", "Transitional Housing"]
     daterange = pd.date_range(today - timedelta(days = time_range), today)
     averages_dict = {"Permanent Exit" : [], "Emergency Shelter" : [], "Temporary Exit" : [], "Transitional Housing" : [], "Unknown/Other" : []}
-    a = [5,|6,7,8,8,1,2|,3,4,5]
     for exit_type in exits:
         for day in daterange:
             avg = count_exits(db= db, exit_type= exit_type, time_range= 90, stop= day)
             averages_dict[exit_type].append(avg)
 
-    # all_
-    # for exit_type in exits:
 
     averages_dict.update({"Days" : daterange})
     avg_df = pd.DataFrame(averages_dict)
