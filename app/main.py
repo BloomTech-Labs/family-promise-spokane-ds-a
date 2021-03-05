@@ -34,7 +34,8 @@ def get_db():
 
 
 # Routes
-@app.get("/members/{member_id}", summary = "Find a member", tags = ["Records"])
+@app.get("/members/{member_id}", summary = "Find a member", 
+            tags = ["Records"], response_description = "The identified member's details")
 def read_member(member_id: int = Path(..., gt = 0), db: Session = Depends(get_db)):
     """
     Retrieves a member's details after passing in **member_id**.
@@ -49,7 +50,8 @@ def read_member(member_id: int = Path(..., gt = 0), db: Session = Depends(get_db
     return db_member
 
 
-@app.get("/families/{family_id}", summary = "Find a family", tags = ["Records"])
+@app.get("/families/{family_id}", summary = "Find a family", 
+            tags = ["Records"], response_description = "The identified family's details")
 def read_family(family_id: int = Path(..., gt= 0), db: Session = Depends(get_db)):
     """
     Retrieves a family's details after passing in their given **family_id**.
@@ -64,11 +66,12 @@ def read_family(family_id: int = Path(..., gt= 0), db: Session = Depends(get_db)
     return db_family
 
 
-@app.get("/exits/{time_range}", summary = "View exit percentages", tags = ["KPIs"])
+@app.get("/exits/{time_range}", summary = "View exit percentages", 
+            tags = ["KPIs"], response_description = "Exit type percentages")
 def all_exits(time_range: int = Path(..., gt = 0, le = 365), db: Session = Depends(get_db)):
     """
     Retrieve the breakdown of all exits in percentages over a date range.
-    Requires passing in a **time_range** to create the date range.
+    Requires passing in a **time_range** integer to create the date range.
         *time_range = today - start date (in days)*
         time_range limit set as 0 < time_range <= 365
     Returns percentage of each of these exit types:
@@ -97,42 +100,85 @@ def all_exits(time_range: int = Path(..., gt = 0, le = 365), db: Session = Depen
     # return exits
 
 
-@app.get("/average_stay/{time_range}", summary = "Average length of stay", tags = ["KPIs"])
+@app.get("/average_stay/{time_range}", summary = "Average length of stay", 
+            tags = ["KPIs"], response_description = "Families average length of stay")
 def average_stay(time_range: int = Path(..., gt = 0, le = 365), db: Session = Depends(get_db)):
     """
     View the average length of families' stay in the shelter over a date range.
-    Requires passing in a **time_range** to create the date range.
+    Requires passing in a **time_range** integer to create the date range.
         *time_range = today - start date (in days)*
         time_range limit set as 0 < time_range <= 365
     
-    Returned average is value rounded to an integer
+    Returned average is value rounded to an integer.
     """
     # Calculate average over date range
     stay_avg = avg_stay(db, time_range = time_range)
     
     # JSON format for web calls
     avg = {"Average Stay" : stay_avg}
-    
+
     return avg
 
-@app.get("/income/{time_range}")
+
+@app.get("/income/{time_range}", summary = "Count income increases", 
+            tags = ["KPIs"], response_description = "Families with increased income")
 def view_income(time_range: int = Path(..., gt = 0, le = 365), db: Session = Depends(get_db)):
+    """
+    Count number of families with an increase in income at exit time.
+    Requires passing in a **time_range** integer to create the date range.
+        *time_range = today - start date (in days)*
+        time_range limit set as 0 < time_range <= 365
+    """
     income = income_increase(db, time_range = time_range)
     return income
 
-@app.get("/pie_exits/{time_range}")
+
+@app.get("/pie_exits/{time_range}", summary = "Exit percentages pie chart", 
+            tags = ["Plots"], response_description = "The generated pie chart JSON")
 def pie_chart(time_range: int = Path(..., gt= 0), db: Session = Depends(get_db)):
+    """
+    Generate a pie chart for exit type over a date range.
+    Requires passing in a **time_range** integer to create the date range.
+        *time_range = today - start date (in days)*
+        time_range set to only accept integers greater than 0
+    
+    Returns the JSON object for the generated interactive pie chart.
+    """
     plotly_json = pie_exits(db, time_range = time_range)
     return plotly_json
 
-@app.get("/avg_plot/{time_range}")
+
+@app.get("/avg_plot/{time_range}", summary = "90-day moving averages line chart", 
+            tags = ["Plots"], response_description = "The generated line chart JSON")
 def moving_average_plot(time_range: int = Path(..., ge = 5, le = 90), db: Session = Depends(get_db)):
+    """
+    Generate a line chart for exit types 90-day moving averages over a date range.
+    Each day's exit type percentages for the previous 90 days is plotted in a line chart.
+
+    Requires passing in a **time_range** integer to create the date range.
+    Date range limit currently set for 90 days before today
+        *time_range = today - start date (in days)*
+        time_range limit set as 0 < time_range <= 365
+
+    Returns the JSON object for the generated interactive line chart.    
+    """
     avg_plot = moving_average(db, time_range= time_range)
     return avg_plot
 
-@app.get("/predict_exits/{member_id}")
+
+@app.get("/predict_exits/{member_id}", summary = "Predict exit type", 
+            tags = ["Prediction"], response_description = "The predicted exit")
 def predict_exits(member_id: int = Path(..., gt = 0), db: Session = Depends(get_db)):
-    """Generates exit destination prediction given the member's id"""
+    """
+    Predict a member's exit type.
+    Requires passing in a valid **member_id**.
+    Possible exit types would be:
+        - Permanent Exit
+        - Emergency Shelter
+        - Temporary Exit
+        - Transitional Housing
+        - Unknown/Other
+    """
     query = f'''select * from members where members.id = {member_id};'''
     df = pd.read_sql_query(query, engine)
     exit = predictor(df)
