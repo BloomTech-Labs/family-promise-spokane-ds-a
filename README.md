@@ -1,12 +1,12 @@
 
 # Family Promise of Spokane
 
-
-You can find the fully deployed project at [Family Promise of Spokane](https://b.familypromisesofspokane.dev/) and the [Data Science API](https://b-ds.familypromisesofspokane.dev/)as long as they are still hosted.
+Welcome to the Data Science Team B's repository for the Family Promise of Spokane Project! This repository holds all the source code for our API as well as the predictive model used by the app.
 
 # Description
 
-The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assitance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
+The Family Promise of Spokane is a US-based nonprofit organization based in Spokane, WA. They are an organization that aims to curb homelessness for families through both corrective and preventive measures. Their services include providing shelter for families as well as rental assitance. For more details of the organizations and the amazing work they do, be sure to check out their [website](https://www.familypromiseofspokane.org/)
+
 # Contributors
 
 ## Data Science Team
@@ -30,31 +30,53 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 <br>
 <br>
 
+## Libraries
 ![fastapi](https://img.shields.io/badge/fastapi-0.60.1-blue)
-![pandas](https://img.shields.io/badge/pandas-1.1.0-blueviolet)
-
 ![uvicorn](https://img.shields.io/badge/uvicorn-0.11.8-ff69b4)
+
+![sqlalchemy](https://img.shields.io/badge/sqlalchemy-1.3.23-00cc96)
 ![python-dotenv](https://img.shields.io/badge/python--dotenv-0.14.0-green)
 
-![scikit-learn](https://img.shields.io/badge/scikit--learn-0.23.2-yellow)
-![psycopg2](https://img.shields.io/badge/psycopg2--2.8.6-informational)
-![fastapi-utils](https://img.shields.io/badge/fastapi--utils-0.2.1-informational)
+![pandas](https://img.shields.io/badge/pandas-1.1.0-blueviolet)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-0.22.2.post1-yellow)
+![plotly](https://img.shields.io/badge/plotly-4.14.3-ab63fa)
 
 
 
-# Deployed Product
-[Front End Dashboard](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/) |
-[Data Science API](http://a-labs29-family-promise.eba-syir5yx3.us-east-1.elasticbeanstalk.com/) |
-[Back End API](https://family-pomise-spokane.herokuapp.com/) |
+# Deployments
+
+As long as the sites are still hosted, you can find the deployments for each of the three branches of the full product below. Otherwise, to view source code or deploy locally, please see the linked repositories instead in the next section.  
+
+[Front End Dashboard](https://b.familypromisesofspokane.dev/) |
+[Data Science API](https://b-ds.familypromisesofspokane.dev/) |
+[Back End API](https://family-promise-spokane-be-b.herokuapp.com/) |
 
 # Linked Repositories
-[Family Promise of Spokane Back End](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) |
-[Family Promise of Spokane Data Science](https://github.com/Lambda-School-Labs/family-promise-spokane-ds-a) |
-[Family Promise of Spokane Front end](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-a) 
+
+[Family Promise of Spokane Front end](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-b) | 
+[Family Promise of Spokane Back End](https://github.com/Lambda-School-Labs/family-promise-spokane-be-b) |
+
 
 # Getting Started
 
-### User Flows
+## Setup Instructions
+
+In your CLI, clone the repository to your local machine using:
+
+    git clone <repository link>
+
+In order for the app to function correctly, the user must set up valid environment variables. There should be a .env file  in the root project directory containing the following:
+
+    SQLALCHEMY_DATABASE_URL = Postgres database credentials
+
+To run the FastAPI app from your CLI, use:
+
+    uvicorn app.main:app --reload
+
+You should be able to see the app running in your [localhost](http://127.0.0.1:8000) after application startup is complete.
+
+
+<!--### User Flows
 
 [Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane)
 
@@ -75,9 +97,6 @@ Our team is developing a digital intake form for families in Family Promise Shel
 - Guest can view their own profile. 
 ### Environment Variables
 
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
-
-    *  DB_URL  - Postgres database credentials
 
 
 
@@ -86,7 +105,8 @@ In order for the app to function correctly, the user must set up their own envir
 | Image Filename | Source / Creator | License                                                                      |
 | -------------- | ---------------- | ---------------------------------------------------------------------------- |
 | Nopic.yet      | INSERT NAME      | [MIT](input githandle here)                             |
-
+-->
+<!--
 ### Installation Instructions
 
 We used Docker for ease of use when dealing with environmental dependancies 
@@ -121,7 +141,7 @@ We used Docker for ease of use when dealing with environmental dependancies
     * docker push ... 
     * eb deploy 
     * eb open 
-
+-->
 # Tech Stack
 
 ### Data Science API built using:
@@ -140,11 +160,6 @@ We used Docker for ease of use when dealing with environmental dependancies
 - FastAPI has been gaining traction over Flask
 - SQL queries are better structured 
 
-### Libraries used:
-- FastAPI
-- sci-kit-learn
-- Pandas
-- psycopg2
 
 # User Flow
 
