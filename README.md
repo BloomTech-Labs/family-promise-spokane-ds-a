@@ -11,8 +11,8 @@ The Family Promise of Spokane is a US-based nonprofit organization based in Spok
 
 The aim of the project is to eventually have a central app for all user types of Family Promise.
 
-[Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane) (Iteration 1)
-[Trello Board]
+[Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane) (Iteration 1) <br>
+[Trello Board](https://trello.com/b/uZDhMoRt/labs-31-family-promise-b) (Iteration 3)
 
 
 ### Curent key features:
@@ -57,7 +57,10 @@ Executive director:
 
 ## Future Teams
 
-Any future DS team assigned to the project for Labs32, ensure you view 31's guide **[doc](https://docs.google.com/document/d/1L0zMq-3E6g_WDIv0JCtq6XCbRkkM8Q3Tm0J3PXwKNXc/edit?usp=sharing)**.
+Any future DS team assigned to the project for Labs32, ensure you view 31's guide **[doc](https://docs.google.com/document/d/1L0zMq-3E6g_WDIv0JCtq6XCbRkkM8Q3Tm0J3PXwKNXc/edit?usp=sharing)**.    
+
+<br>
+<br>
 
 # Deployments
 
